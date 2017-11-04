@@ -1,12 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8"/>
+    <title>D3.jsの練習</title>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <style>
+        body {
+            background-color: #F5F5F5;
+        }
+    </style>
 </head>
 <body>
+<img src="https://user-images.githubusercontent.com/649128/32412680-bf93f244-c242-11e7-8071-e32d8cba5150.png" alt="">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-ease.v1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var hotentry_list = {{context|safe}};
+        var w = $(window).width();
+        var h = $(window).height();
 
-hoge
+        var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+        var ease = d3.easeBounceIn;
 
+        svg.selectAll("circle")
+            .data(hotentry_list)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d, i) {
+                console.log(10 + i);
+                return 10 + (i * 20);
+            })
+            .attr("cy", h / 2)
+            .attr("r", 0)
+            .attr("fill", function (d) {
+                var f = {};
+                f['世の中'] = function() {
+                    return '#A78358';
+                };
+                f['政治と経済'] = function() {
+                    return '#A78358';
+                };
+                f['暮らし'] = function() {
+                    return '#068B71';
+                };
+                f['学び'] = function() {
+                    return '#068B71';
+                };
+                f['テクノロジー'] = function() {
+                    return '#00A5DE';
+                };
+                f['エンタメ'] = function() {
+                    return '#F5AC0F';
+                };
+                f['アニメとゲーム'] = function() {
+                    return '#F5AC0F';
+                };
+                f['おもしろ'] = function() {
+                    return '#F5AC0F';
+                };
+                f['カテゴリ不明'] = function() {
+                    return '#fff';
+                };
+                return f[d.fields.category]();
+            })
+            .transition()
+            .ease(ease)
+            .delay(function (d, i) {
+                return i * 300
+            })
+            .duration(500)
+            .attr("r", function (d) {
+                return d.fields.bookmark_user_count / 10
+            })
+            .style('opacity', 0.5);
+    });
+</script>
+
+<div class="hoge"></div>
 </body>
 </html>

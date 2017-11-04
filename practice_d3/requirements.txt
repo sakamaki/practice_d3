@@ -1,0 +1,4 @@
+Django==1.11.6
+requests==2.18.4
+beautifulsoup4==4.6.0
+gunicorn==19.7.1

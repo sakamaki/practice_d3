@@ -19,5 +19,5 @@ from practice_d3.app.views import d3
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^d3/', d3),
+    url(r'^j2net/d3/', d3),
 ]
